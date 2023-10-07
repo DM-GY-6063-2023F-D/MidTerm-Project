@@ -1,60 +1,32 @@
-# p5.js Template
+# 6063D 2023F Mid Term Project
 
-This is a README file that can be used to describe and document your assignment.
+## Milestone 1
 
-Markdown Cheatsheet (from [https://www.markdownguide.org/cheat-sheet/](https://www.markdownguide.org/cheat-sheet/)):
+### What book did you choose? What is it about?
+The Left Hand of Darkness, by Ursula K. Le Guin. The book is about shifting political and personal loyalties between two nations and their citizens in a fictitious planet called Gethen.
 
----
----
+Individuals on Gethen are ambisexual, with no fixed sex; instead they go into a period of fertility once a month where masculine or feminine traits are expressed temporarily. Relationships in Gethen are also dictated by *shifgrethor*, an intricate set of unspoken social rules and formal courtesy.
 
-# Heading1
-## Heading2
-### Heading3
-#### Heading4
-##### Heading5
-###### Heading6
+The story is told from the perspective of a visitor who doesn't fully understand all of these differences and how they influence society and politics on Gethen.
 
-**bold text**
+### What aspect of the book will you include in your cover?
+The book explores themes of belonging and understanding through the rigidity and permeability of different dichotomies. 
 
-*italicized text*
+The fluid sexuality and lack of gendered expectations are seen as the reason for greater equilibrium, justice and peacefulness on the planet, but, since the two nations have different political structures and social organization, those differences and misunderstood *shifgrethor* eventually cause them to go to war with each other. It's like some differences are understandable and respected, while others are not. Throughout the book, the main character's behavior also shifts away from rigidly rationalistic to be more patient and caring.
 
-~~strikethrough text~~
+### Is it interactive? time-based? both?
+Time-based.
 
-Ordered List:
-1. First item
-2. Second item
-3. Third item
+### What ideas would you like to explore or experiment with?
+Classes to create objects that represent the population of the two nations. These will change according to time and what other objects are near them.
 
-Unordered List:
-- First item
-- Second item
-- Third item
+I will probably use a design that has a diagonal division, and some shapes that are in grids, but jittery. Changes that start with one individual will propagate through all the other individuals of a nation, and which nation has its own way of propagating change.
 
-`short code block`
+#### Some sketches:
+![](./imgs/mid-term-01_00.jpg)
+![](./imgs/mid-term-01_01.jpg)
+![](./imgs/mid-term-01_02.jpg)
+![](./imgs/mid-term-01_03.jpg)
 
-```
-extended code block
-fun() {
-  return 0
-}
-```
-
-Link:  
-[linked text](https://www.example.com)
-
-
-Image with url:  
-![image description](https://dm-gy-6063-2023f-d.github.io/assets/homework/02/clark-espaco-modulado-00.jpg)
-
-
-Image on repo:  
-![image description](./file-name.jpg)
-
-
-To start a new line, add two spaces at the end of a line, like this:  
-this is a new line.
-
-
-To start a new paragraph, leave an empty line between two lines of text.
-
-This is a new paragraph.
+### Are there aspects of your project that are related to any of the readings we’ve done?
+Can't think of any right now.
