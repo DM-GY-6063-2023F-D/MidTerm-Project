@@ -1,5 +1,34 @@
 # 6063D 2023F Mid Term Project
 
+## Milestone 2
+
+This week I ...
+
+Overall design.
+
+Two types of update waves.
+
+![](./imgs/mid-term-02_00.jpg)
+
+
+Challenge: figure out distance from point to line
+
+Rotate and calculate? 
+![](./imgs/mid-term-02_01.jpg) ❌
+
+Shortest distance from point is along a line that is perpendicular to original line:
+![](./imgs/mid-term-02_02.jpg)
+
+But didn't get far.
+
+Focused on getting some of the background and overall structure figured out
+
+![](./imgs/mid-term-02_03.jpg)
+
+Yin-Yang somewhat of an accident, but it connects to some of the dualistic themes of the book, including the Taoistic religion Handdara in one of the two nations.
+
+
+---
 ## Milestone 1
 
 ### What book did you choose? What is it about?
