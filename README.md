@@ -2,31 +2,41 @@
 
 ## Milestone 2
 
-This week I ...
+This week I added the structure and pseudo-code to my project. I also added some shapes and temporary animations.
 
-Overall design.
+The design is gonna be a bunch of squares in a grid, split diagonally. Each of the two halves represents a nation in the planet *Gethen*, and each square is a *Gethenian*.
 
-Two types of update waves.
+The left side of the canvas will respond to clicks, which will trigger a color change on both halves. The color change will also work on a timer, so if there are no interactions for one minute, it will also be triggered automatically, but start on the other half, on the right.
+
+There will be two types of update waves: if triggered by a click, the update wave will proceed radially from the location of the click, otherwise the change will start on the other side and proceed from the center division line and proceed out.
 
 ![](./imgs/mid-term-02_00.jpg)
 
+I'm still not sure how the transition will go from one side to the other... I think once the radial wave reaches the division, that could trigger the linear wave... but I'm not sure about the other way.
 
-Challenge: figure out distance from point to line
+The first challenge I plan to work on next week is the code that calculates the distance from a point to a line. This will be needed in the linear wave update. The radial wave is pretty easy, because the distance between two points is just: $$d = \sqrt{(x_1 - x_0)^2 + (y_1 - y_0)^2}$$.
 
-Rotate and calculate? 
+I didn't spend too much time on this yet, but considered a method where I would rotate the canvas and transform the distance function into just the x-distance. I don't think this would work because drawing on the tilted canvas would be hard.
+
 ![](./imgs/mid-term-02_01.jpg) ❌
 
-Shortest distance from point is along a line that is perpendicular to original line:
+After reading about this calculation, I learned that the shortest distance from a point to a line is along a second line that is perpendicular to original line:
+
 ![](./imgs/mid-term-02_02.jpg)
 
-But didn't get far.
+I worked out the math that will be needed, but I haven't implemented it yet. I can use vectors to do some dot-product projections and work out the distance from a point to a line geometrically.
 
-Focused on getting some of the background and overall structure figured out
+My focus was on getting the background, the characters and the overall structure of the logic and class.
 
 ![](./imgs/mid-term-02_03.jpg)
 
-Yin-Yang somewhat of an accident, but it connects to some of the dualistic themes of the book, including the Taoistic religion Handdara in one of the two nations.
+The design is looking like this:
 
+![](./imgs/mid-term-02_04.jpg)
+
+I didn't want to think about color yet, so I tested some of the update logic in my class using rotation. While testing this logic, I accidentally created some wave patterns using a ```cos()``` function to pick different angle velocities for each square. This is quite nice, and is related to the theme of mutual influence between the people in *Gethen*, but I probably won't use it in the end because it might distract or interfere with the color changes. Or maybe this can happen just for some seconds as the color change starts, or stops.
+
+I just realized that my cover kind of looks like the [Yin-Yang](https://en.wikipedia.org/wiki/Yin_and_yang) [Taijitu](https://en.wikipedia.org/wiki/Taijitu). This was totally an accident, but it connects to some of the dualistic themes of the book, including *Handdara*, the Taoistic religion in the *Karhide* nation.
 
 ---
 ## Milestone 1
