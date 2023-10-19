@@ -14,7 +14,7 @@ There will be two types of update waves: if triggered by a click, the update wav
 
 I'm still not sure how the transition will go from one side to the other... I think once the radial wave reaches the division, that could trigger the linear wave... but I'm not sure about the other way.
 
-The first challenge I plan to work on next week is the code that calculates the distance from a point to a line. This will be needed in the linear wave update. The radial wave is pretty easy, because the distance between two points is just: $$d = \sqrt{(x_1 - x_0)^2 + (y_1 - y_0)^2}$$.
+The first challenge I plan to work on next week is the code that calculates the distance from a point to a line. This will be needed in the linear wave update. The radial wave is pretty easy, because the distance between two points is just: $$d = \sqrt{(x_1 - x_0)^2 + (y_1 - y_0)^2}$$
 
 I didn't spend too much time on this yet, but considered a method where I would rotate the canvas and transform the distance function into just the x-distance. I don't think this would work because drawing on the tilted canvas would be hard.
 
