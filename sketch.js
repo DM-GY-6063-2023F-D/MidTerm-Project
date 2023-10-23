@@ -21,20 +21,22 @@ class Gethenian {
     if (this.region == KARHIDE) {
       this.baseFillColor = color(0);
       this.baseStrokeColor = color(255);
-      this.kemmerFillColor = color("darkred");
+      this.kemmerFillColor = color("skyblue");
       this.kemmerStrokeColor = color(0);
     } else if (this.region == ORGOREYN) {
       this.baseFillColor = color(255);
       this.baseStrokeColor = color(0);
-      this.kemmerFillColor = color("gold");
-      this.kemmerStrokeColor = color(0);
+      this.kemmerFillColor = color("royalblue");
+      this.kemmerStrokeColor = color(255);
     }
+
+    let distanceFromCenter = distanceToLine(-height / width, height, this.x, this.y);
+    let distanceFromDiagonal = distanceToLine(height / width, 0, this.x, this.y);
+    let distanceFactor = distanceFromCenter * distanceFromDiagonal;
+    this.alpha = 255 - distanceFactor * 0.002;
 
     this.fillColor = this.baseFillColor;
     this.strokeColor = this.baseStrokeColor;
-
-    let phase = (TWO_PI * (this.x + this.y)) / 500;
-    this.angleVelocity = radians(5 * cos(phase));
   }
 
   startKemmer(_x, _y) {
@@ -50,13 +52,13 @@ class Gethenian {
 
   stopKemmer() {
     this.radius = 0;
-    this.colorVelocity = -0.05;
+    this.colorVelocity *= -1;
     this.baseFillColor = invertColor(this.baseFillColor);
     this.baseStrokeColor = invertColor(this.baseStrokeColor);
   }
 
+  // color and rotation updates
   update() {
-    // color and rotation updates
     let distanceFrom;
 
     if (this.region == KARHIDE) {
@@ -79,6 +81,7 @@ class Gethenian {
       this.kemmerFillColor,
       this.colorAmmount
     );
+    this.fillColor.setAlpha(this.alpha);
 
     this.strokeColor = lerpColor(
       this.baseStrokeColor,
@@ -86,9 +89,7 @@ class Gethenian {
       this.colorAmmount
     );
 
-    // this is here just to test the logic
-    //   but it is quite pretty
-    this.angle += this.angleVelocity;
+    this.angle = PI * this.colorAmmount;
   }
 
   draw() {
@@ -107,12 +108,21 @@ let BOOK_COVER_RATIO = 25 / 17;
 let NUM_COLS = 26;
 let TIMEOUT_PERIOD = 60 * 1000; // 1 minute
 
+let TITLE = "The Left Hand\nof Darkness";
+let AUTHOR = "Ursula K. Le Guin";
+
 let cWidth;
 let gethen;
 let karhide;
 let orgoreyn;
 
 let nextAutoUpdate;
+
+let mFont;
+
+function preload() {
+  mFont = loadFont("./assets/e.ttf");
+}
 
 function setup() {
   createCanvas(windowHeight / BOOK_COVER_RATIO, windowHeight);
@@ -127,6 +137,29 @@ function setup() {
     }
   }
   nextAutoUpdate = millis() + TIMEOUT_PERIOD;
+}
+
+function titleAuthor() {
+  textFont(mFont);
+  textSize(34);
+
+  fill(karhide[0].strokeColor);
+  textAlign(LEFT, TOP);
+  text(TITLE, 5, 5);
+
+  fill(orgoreyn[0].strokeColor);
+  textAlign(RIGHT, BOTTOM);
+  text(TITLE, width - 5, height - 5);
+
+  textSize(16);
+
+  fill(karhide[0].strokeColor);
+  textAlign(LEFT, TOP);
+  text(AUTHOR, 5, 2 * 34 + 17);
+
+  fill(orgoreyn[0].strokeColor);
+  textAlign(RIGHT, BOTTOM);
+  text(AUTHOR, width - 5, height - (2 * 34 + 17));
 }
 
 function draw() {
@@ -162,13 +195,15 @@ function draw() {
     let rY = random(height / 2);
     startKarhideKemmer(rX, rY);
   }
+
+  titleAuthor();
 }
 
 function startKarhideKemmer(_x, _y) {
   let isKarhideReady = karhide.reduce(readyToKemmer, true);
   let isOrgoreynReady = orgoreyn.reduce(readyToKemmer, true);
 
-  // if in karhide and karhide ready, start kemmer
+  // if in karhide and ready, start kemmer
   if (isKarhideReady && isOrgoreynReady && isInKarhide(_x, _y)) {
     for (let ci = 0; ci < gethen.length; ci++) {
       gethen[ci].startKemmer(_x, _y);
