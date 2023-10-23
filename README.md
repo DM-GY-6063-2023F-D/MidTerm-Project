@@ -31,7 +31,9 @@ The blue colors have to do with the cold, ice and snow moments in the book. I di
 
 The font is a kind of futuristic font from the 1960s or 1970s.
 
+My presentation slides are [here](./assets/presentation_hersan.pdf).
 
+---
 ## Milestone 2
 
 This week I added the structure and pseudo-code to my project. I also added some shapes and temporary animations.
