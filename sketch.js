@@ -36,52 +36,40 @@ class Gethenian {
   }
 
   startKemmer(_x, _y) {
-    if (this.region == KARHIDE) {
-      this.cx = _x;
-      this.cy = _y;
-      this.radius = 0;
-      this.colorAmmount = 0;
-      this.radiusVelocity = 5;
-      this.colorVelocity = 0.05;
-    }
+    this.cx = _x;
+    this.cy = _y;
+    this.radius = 0;
+    this.colorAmmount = 0;
+    this.radiusVelocity = this.region == KARHIDE ? 5 : 3;
+    this.colorVelocity = this.radiusVelocity / 100;
   }
 
   stopKemmer() {
-    if (this.region == KARHIDE) {
-      this.radius = 0;
-      this.colorVelocity = -0.05;
-      this.baseFillColor = this.invertColor(this.baseFillColor);
-      this.baseStrokeColor = this.invertColor(this.baseStrokeColor);
-    }
+    this.radius = 0;
+    this.colorVelocity = -0.05;
+    this.baseFillColor = invertColor(this.baseFillColor);
+    this.baseStrokeColor = invertColor(this.baseStrokeColor);
   }
 
   update() {
     // color and rotation updates
+    let distanceFrom;
+
     if (this.region == KARHIDE) {
       // Color based on distance from a point (x, y) within the region
-      let distFromCenter = dist(this.cx, this.cy, this.x, this.y);
-      if (distFromCenter < this.radius) {
-        this.colorAmmount += this.colorVelocity;
-        this.colorAmmount = constrain(this.colorAmmount, 0, 1);
-        // this.angle += this.angleVelocity;
-      } else {
-        this.radius += this.radiusVelocity;
-      }
+      distanceFrom = dist(this.cx, this.cy, this.x, this.y);
     } else if (this.region == ORGOREYN) {
       // Color updates based on distance from line separating the two regions
-
+      let m = -height / width;
+      distanceFrom = distanceToLine(m, height, this.x, this.y);
     }
 
-    // this is here just to test the logic
-    //   but it is quite pretty
-    this.angle += this.angleVelocity;
-  }
-
-  draw() {
-    push();
-    translate(this.x + this.w / 2, this.y + this.w / 2);
-    rotate(this.angle);
-    translate(-this.w / 2, -this.w / 2);
+    if (distanceFrom < this.radius) {
+      this.colorAmmount += this.colorVelocity;
+      this.colorAmmount = constrain(this.colorAmmount, 0, 1);
+    } else {
+      this.radius += this.radiusVelocity;
+    }
 
     this.fillColor = lerpColor(
       this.baseFillColor,
@@ -95,17 +83,20 @@ class Gethenian {
       this.colorAmmount
     );
 
+    // this is here just to test the logic
+    //   but it is quite pretty
+    this.angle += this.angleVelocity;
+  }
+
+  draw() {
+    push();
+    translate(this.x + this.w / 2, this.y + this.w / 2);
+    rotate(this.angle);
+    translate(-this.w / 2, -this.w / 2);
     stroke(this.strokeColor);
     fill(this.fillColor);
     rect(0, 0, this.w, this.w);
     pop();
-  }
-
-  invertColor(_color) {
-    var r = 255 - red(_color);
-    var g = 255 - green(_color);
-    var b = 255 - blue(_color);
-    return color(r, g, b);
   }
 }
 
@@ -148,13 +139,14 @@ function draw() {
   triangle(width, 0, width, height, 0, height);
 
   let isKarhideKemmered = karhide.reduce(allKemmered, true);
+  let isOrgoreynKemmered = orgoreyn.reduce(allKemmered, true);
 
-  if (isKarhideKemmered) {
+  if (isKarhideKemmered && isOrgoreynKemmered) {
     nextAutoUpdate = millis() + TIMEOUT_PERIOD;
   }
 
   for (let ci = 0; ci < gethen.length; ci++) {
-    if (isKarhideKemmered) {
+    if (isKarhideKemmered && isOrgoreynKemmered) {
       gethen[ci].stopKemmer();
     }
     gethen[ci].update();
@@ -171,9 +163,10 @@ function draw() {
 
 function startKarhideKemmer(_x, _y) {
   let isKarhideReady = karhide.reduce(readyToKemmer, true);
+  let isOrgoreynReady = orgoreyn.reduce(readyToKemmer, true);
 
   // if in karhide and karhide ready, start kemmer
-  if (isKarhideReady && isInKarhide(_x, _y)) {
+  if (isKarhideReady && isOrgoreynReady && isInKarhide(_x, _y)) {
     for (let ci = 0; ci < gethen.length; ci++) {
       gethen[ci].startKemmer(_x, _y);
     }
@@ -183,6 +176,19 @@ function startKarhideKemmer(_x, _y) {
 
 function mouseClicked() {
   startKarhideKemmer(mouseX, mouseY);
+}
+
+function distanceToLine(_m, _b, _x, _y) {
+  let mnMag = sqrt(_m * _m + 1);
+  let numerator = abs(_m * _x - _y + _b);
+  return numerator / mnMag;
+}
+
+function invertColor(_color) {
+  var r = 255 - red(_color);
+  var g = 255 - green(_color);
+  var b = 255 - blue(_color);
+  return color(r, g, b);
 }
 
 function isInKarhide(_x, _y) {
