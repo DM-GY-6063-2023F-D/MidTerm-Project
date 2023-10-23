@@ -91,7 +91,7 @@ Time-based.
 ### What ideas would you like to explore or experiment with?
 Classes to create objects that represent the population of the two nations. These will change according to time and what other objects are near them.
 
-I will probably use a design that has a diagonal division, and some shapes that are in grids, but jittery. Changes that start with one individual will propagate through all the other individuals of a nation, and which nation has its own way of propagating change.
+I will probably use a design that has a diagonal division, and some shapes that are in grids, but jittery. Changes that start with one individual will propagate through all the other individuals of a nation, and each nation has its own way of propagating change.
 
 #### Some sketches:
 ![](./imgs/mid-term-01_00.jpg)
