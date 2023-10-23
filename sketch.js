@@ -11,6 +11,8 @@ class Gethenian {
     this.region = _region;
     this.cx = 0;
     this.cy = 0;
+    this.m = -height / width;
+    this.b = height;
     this.radius = 0;
     this.radiusVelocity = 0;
     this.colorAmmount = 0;
@@ -24,8 +26,8 @@ class Gethenian {
     } else if (this.region == ORGOREYN) {
       this.baseFillColor = color(255);
       this.baseStrokeColor = color(0);
-      this.kemmerFillColor = color("darkblue");
-      this.kemmerStrokeColor = color(255);
+      this.kemmerFillColor = color("gold");
+      this.kemmerStrokeColor = color(0);
     }
 
     this.fillColor = this.baseFillColor;
@@ -38,6 +40,8 @@ class Gethenian {
   startKemmer(_x, _y) {
     this.cx = _x;
     this.cy = _y;
+    this.m = -height / width;
+    this.b = 2 * height - (this.cy - this.m * this.cx);
     this.radius = 0;
     this.colorAmmount = 0;
     this.radiusVelocity = this.region == KARHIDE ? 5 : 3;
@@ -60,8 +64,7 @@ class Gethenian {
       distanceFrom = dist(this.cx, this.cy, this.x, this.y);
     } else if (this.region == ORGOREYN) {
       // Color updates based on distance from line separating the two regions
-      let m = -height / width;
-      distanceFrom = distanceToLine(m, height, this.x, this.y);
+      distanceFrom = distanceToLine(this.m, this.b, this.x, this.y);
     }
 
     if (distanceFrom < this.radius) {
@@ -101,7 +104,7 @@ class Gethenian {
 }
 
 let BOOK_COVER_RATIO = 25 / 17;
-let NUM_COLS = 17;
+let NUM_COLS = 26;
 let TIMEOUT_PERIOD = 60 * 1000; // 1 minute
 
 let cWidth;
