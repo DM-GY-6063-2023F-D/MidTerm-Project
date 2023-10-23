@@ -108,7 +108,7 @@ class Gethenian {
 }
 
 let BOOK_COVER_RATIO = 25 / 17;
-let NUM_COLS = 26;
+let NUM_COLS = 28;
 let TIMEOUT_PERIOD = 60 * 1000; // 1 minute
 
 let TITLE = "The Left Hand\nof Darkness";
