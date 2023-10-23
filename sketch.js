@@ -81,7 +81,10 @@ class Gethenian {
       this.kemmerFillColor,
       this.colorAmmount
     );
-    this.fillColor.setAlpha(this.alpha);
+
+    // alpha based on distance and colorAmmount
+    let mAlpha = map(this.colorAmmount, 0, 1, 255, this.alpha, true);
+    this.fillColor.setAlpha(mAlpha);
 
     this.strokeColor = lerpColor(
       this.baseStrokeColor,
