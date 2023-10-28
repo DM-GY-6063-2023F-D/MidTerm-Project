@@ -133,8 +133,8 @@ function setup() {
   cWidth = width / NUM_COLS;
   gethen = [];
 
-  for (let y = 0; y < height - cWidth; y += cWidth) {
-    for (let x = 0; x < width - cWidth; x += cWidth) {
+  for (let y = 0; y < height; y += cWidth) {
+    for (let x = 0; x < width; x += cWidth) {
       let mRegion = isInKarhide(x, y) ? KARHIDE : ORGOREYN;
       gethen.push(new Gethenian(x, y, cWidth, mRegion));
     }
